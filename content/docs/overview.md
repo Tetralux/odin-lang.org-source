@@ -2969,7 +2969,9 @@ Directives a way of extending the core behaviour of the Odin programming languag
 
 * **#packed**
 
-This tag can be applied to struct. Its fields will remain in source-order.
+This tag can be applied to a struct. It removes padding between fields that is normally inserted to align fields according to their type's alignment requirements. Fields remain in source order.
+
+This is useful in cases where the structure is unlikely to be correctly aligned in the first place, or if the space-savings are more important or useful than the access speed of the fields. Accessing a field in packed struct may require copying the field out of the struct into a temporary location, or using a machine instruction that doesn't assume the pointer address is correctly aligned, in order to be performant or avoid crashing on some systems. (See `intrinsics.unaligned_load`.)
 ```odin
 struct #packed {x: u8, y: i32, z: u16, w: u8}
 ```
