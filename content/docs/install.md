@@ -43,7 +43,7 @@ The following platform-specific steps are necessary:
     * Make sure the LLVM binaries and the linker are added to your `$PATH` environmental variable (see `brew info llvm@11`)
 
 - GNU/Linux and other \*Nix
-    * For Linux: clang and llvm (version 11.1, 12 or 13; using your distro's package manager)
+    * For Linux: Clang and LLVM (version 11.1, 12.0.1, 13 or 14; using your distro's package manager)
     * For FreeBSD: `pkg install bash git llvm14`
     * Make sure the LLVM binaries and the linker are added to your `$PATH` environmental variable
 
@@ -69,19 +69,22 @@ Now navigate to the Odin directory in your terminal, use `make`, and you should 
 
 Now you can export the odin folder to the PATH
 
-#### For Linux and other \*Nix
-For Linux, make sure you have `llvm` and `clang` installed through your package managers.
+#### For Linux or FreeBSD
 
-**Notes for LLVM:**
-Odin supports LLVM versions 11, 12.0.1, 13, and 14, only.
-If your LLVM version is too old or new, then you may install or build a suitable version of LLVM, and set the `LLVM_CONFIG` environment variable while building.
-e.g: `LLVM_CONFIG=llvm-config-14 ./build_odin.sh`, `LLVM_CONFIG=/usr/lib/llvm14/llvm-config ./build_odin.sh`
+Make sure all requirements are installed. (`llvm`, `clang` on Linux; `git`, `bash`, `llvm14` on BSD.)
 
-For FreeBSD make sure you have `bash`, `git` and the latest version of LLVM (the base `llvm` package is most of the times outdated).
+Now navigate to the Odin directory in your terminal, run `make`.
 
-Now navigate to the Odin directory in your terminal, use `make`, and you should have a newly-built, fresh Odin compiler!
+If your LLVM version is too old or new, then you will get an error here.  
+You may install or build a suitable version of LLVM, and set the `LLVM_CONFIG` environment variable to use it while building.
 
-**Notes for Linux:** The compiler currently relies on the `core` and `shared` library collection being relative to the compiler executable. Installing the compiler in the usual sense (to `/usr/local/bin` or similar) is therefore not as straight forward as you need to make sure the mentioned libraries are available. As a result, it is recommended to simply explicitly invoke the compiler with `/path/to/odin` in your preferred build system, or add `/path/to/odin` to `$PATH`.
+e.g: `LLVM_CONFIG=llvm-config-14 ./build_odin.sh`, `LLVM_CONFIG=/path/to/llvm/bin/llvm-config ./build_odin.sh`
+
+
+
+### Notes for \*Nix-like systems
+The compiler currently relies on the `core` and `shared` library collection being relative to the compiler executable. Installing the compiler in the usual sense (to `/usr/local/bin` or similar) is therefore not as straight forward as you need to make sure the mentioned libraries are available. As a result, it is recommended to simply explicitly invoke the compiler with `/path/to/odin` in your preferred build system, or add `/path/to/odin` to `$PATH`.
+
 
 ### Updating the compiler
 For a compiler that's in-development like Odin, things move fast. Make sure you keep your compiler up-to-date by running `git pull` and then rebuilding every now and then. (or, if you use releases, redownload and rebuild)
