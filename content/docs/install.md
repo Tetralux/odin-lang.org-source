@@ -72,6 +72,11 @@ Now you can export the odin folder to the PATH
 #### For Linux and other \*Nix
 For Linux, make sure you have `llvm` and `clang` installed through your package managers.
 
+**Notes for LLVM:**
+Odin supports LLVM versions 11, 12.0.1, 13, and 14, only.
+If your LLVM version is too old or new, then you may install or build a suitable version of LLVM, and set the `LLVM_CONFIG` environment variable while building.
+e.g: `LLVM_CONFIG=llvm-config-14 ./build_odin.sh`, `LLVM_CONFIG=/usr/lib/llvm14/llvm-config ./build_odin.sh`
+
 For FreeBSD make sure you have `bash`, `git` and the latest version of LLVM (the base `llvm` package is most of the times outdated).
 
 Now navigate to the Odin directory in your terminal, use `make`, and you should have a newly-built, fresh Odin compiler!
